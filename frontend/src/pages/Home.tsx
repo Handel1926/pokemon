@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 import { PAGE_SIZE, TOTAL_NUM_CARD } from "../pageSize";
+import Card from "../ui/Card";
+import Table from "../ui/Table";
+
+type POKEM = {
+  url: string;
+  name: string;
+};
 
 function Home() {
   const [pageN, setPageN] = useState(1);
 
-  const [pokeMonList, setPokemonList] = useState();
+  const [pokeMonList, setPokemonList] = useState<POKEM[]>();
   const [startList, setStartList] = useState<number>(0);
   const [stopList, setstopList] = useState<number>(20);
 
@@ -39,14 +46,25 @@ function Home() {
   }
 
   return (
-    <div className="h-full w-full p-8 ">
-      <div className="flex justify-between">
-        <button type="button" onClick={goLeft}>
-          left
+    <div className="h-full w-full p-8 flex flex-col gap-3">
+      <div className="flex justify-between border rounded shadow shadow-black p-4">
+        <button
+          type="button"
+          onClick={goLeft}
+          className=" capitalize font-semibold text-xl"
+        >
+          previous
         </button>
-        <button type="button" onClick={goRight}>
-          right
+        <button
+          type="button"
+          onClick={goRight}
+          className=" capitalize font-semibold text-xl"
+        >
+          Next
         </button>
+      </div>
+      <div className="w-full h-full pb-36 overflow-y-auto">
+        <Table pokeList={pokeMonList} />
       </div>
     </div>
   );

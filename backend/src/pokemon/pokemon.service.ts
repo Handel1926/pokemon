@@ -6,7 +6,7 @@ const P = new PokemonClient();
 @Injectable()
 export class PokemonService {
   async findAll(start: number, stop: number) {
-    const allPoke = await P.listPokemons(start, stop).then(
+    const allPoke = await P.listPokemonSpecies(start, stop).then(
       (data) => data.results,
     );
     return allPoke;
