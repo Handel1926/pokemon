@@ -11,4 +11,8 @@ export class PokemonService {
     );
     return allPoke;
   }
+  async findOne(id: number) {
+    const pokemon = await P.getPokemonById(id).then((data) => data);
+    return pokemon;
+  }
 }

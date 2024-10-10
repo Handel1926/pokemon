@@ -1,3 +1,5 @@
+import Search from "./Search";
+
 function Header() {
   return (
     <nav className=" w-full h-fit flex items-center bg-black">
@@ -9,6 +11,8 @@ function Header() {
         />
         <h1 className="text-4xl text-yellow-200">Pokemone</h1>
       </div>
+
+      <Search />
     </nav>
   );
 }

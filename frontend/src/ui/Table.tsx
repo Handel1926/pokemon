@@ -15,8 +15,13 @@ export default function ({ pokeList }: Props) {
         <th>PokeBall</th>
       </tr>
       {pokeList &&
-        pokeList.map((poke) => (
-          <TableRow url={poke.url} name={poke.name} pokeBall="ball" />
+        pokeList.map((poke, index) => (
+          <TableRow
+            url={poke.url}
+            name={poke.name}
+            pokeBall="ball"
+            key={index}
+          />
         ))}
     </table>
   );

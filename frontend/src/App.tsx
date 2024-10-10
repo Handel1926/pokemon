@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import AppLayout from "./ui/AppLayout";
+import Details from "./pages/Details";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route element={<AppLayout />}>
             <Route path="/home" element={<Home />} />
+            <Route path="/pokemon/details/:id" element={<Details />} />
           </Route>
         </Routes>
       </BrowserRouter>
