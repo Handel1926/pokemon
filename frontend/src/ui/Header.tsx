@@ -1,6 +1,16 @@
+import { Dispatch, SetStateAction } from "react";
 import Search from "./Search";
+import { ThemeContextType } from "../../types";
 
-function Header() {
+type Props = {
+  setTheme: Dispatch<SetStateAction<ThemeContextType>>;
+  theme: string;
+};
+
+function Header({ setTheme, theme }: Props) {
+  const handleTheme = () => {
+    setTheme((preval) => (preval === "light" ? "dark" : "light"));
+  };
   return (
     <nav className=" w-full h-fit flex items-center bg-black">
       <div className="w-fit flex items-center gap-3">
@@ -13,6 +23,10 @@ function Header() {
       </div>
 
       <Search />
+
+      <button type="button" onClick={handleTheme} className="text-white">
+        {theme}
+      </button>
     </nav>
   );
 }

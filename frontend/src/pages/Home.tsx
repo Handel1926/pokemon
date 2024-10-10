@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PAGE_SIZE, TOTAL_NUM_CARD } from "../pageSize";
 import Card from "../ui/Card";
 import Table from "../ui/Table";
+import { ThemeContext } from "../ui/AppLayout";
 
 type POKEM = {
   url: string;
@@ -14,6 +15,7 @@ function Home() {
   const [pokeMonList, setPokemonList] = useState<POKEM[]>();
   const [startList, setStartList] = useState<number>(0);
   const [stopList, setstopList] = useState<number>(20);
+  const theme = useContext(ThemeContext);
 
   useEffect(() => {
     async function getAllpoke() {
@@ -46,7 +48,11 @@ function Home() {
   }
 
   return (
-    <div className="h-full w-full p-8 flex flex-col gap-3">
+    <div
+      className={`${
+        theme === "light" ? "bg-white text-black " : "bg-black text-white"
+      } h-full w-full p-8 flex flex-col gap-3`}
+    >
       <div className="flex justify-between border rounded shadow shadow-black p-4">
         <button
           type="button"

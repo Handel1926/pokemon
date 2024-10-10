@@ -3,6 +3,7 @@ export interface POKEM {
   name: string;
 }
 
+type ThemeContextType = "light" | "dark";
 export interface PokemonAbility {
   /** Whether or not this is a hidden ability */
   is_hidden: boolean;
