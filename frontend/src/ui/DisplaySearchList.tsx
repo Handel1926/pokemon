@@ -1,6 +1,6 @@
-import React, { Dispatch, SetStateAction, useContext } from "react";
+import { useContext } from "react";
 import { POKEM } from "../../types";
-import { SearchContext } from "./SearchModal";
+import { ModalContext } from "./Modal";
 import { useNavigate } from "react-router-dom";
 type Props = {
   searchList: POKEM[] | undefined;
@@ -8,21 +8,14 @@ type Props = {
 
 export default function DisplaySearchList({ searchList }: Props) {
   const navigate = useNavigate();
-  const { setShowSearch } = useContext(SearchContext);
+  const { setShowModal } = useContext(ModalContext);
 
   const moveTodetails = (index: number) => {
-    setShowSearch(false);
+    setShowModal(false);
     navigate(`/pokemon/details/${index + 1}`);
   };
   return (
     <div className="w-full h-fit relative">
-      <button
-        type="button"
-        onClick={() => setShowSearch(false)}
-        className="absolute bg-black text-white right-4 top-4"
-      >
-        close
-      </button>
       <ul>
         {searchList &&
           searchList.map((pokemon, index) => (

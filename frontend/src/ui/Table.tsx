@@ -15,20 +15,24 @@ export default function Table({ pokeList }: Props) {
         theme === "light" ? "bg-white text-black " : "bg-black text-white"
       }  w-full h-full overflow-y-auto`}
     >
-      <tr className="w-full h-fit text-inherit">
-        <th>Icons</th>
-        <th>Name</th>
-        <th>PokeBall</th>
-      </tr>
-      {pokeList &&
-        pokeList.map((poke, index) => (
-          <TableRow
-            url={poke.url}
-            name={poke.name}
-            pokeBall="ball"
-            key={index}
-          />
-        ))}
+      <thead>
+        <tr className="w-full h-fit text-inherit">
+          <th>Icons</th>
+          <th>Name</th>
+          <th>PokeBall</th>
+        </tr>
+      </thead>
+      <tbody>
+        {pokeList &&
+          pokeList.map((poke, index) => (
+            <TableRow
+              url={poke.url}
+              name={poke.name}
+              pokeBall="ball"
+              key={index}
+            />
+          ))}
+      </tbody>
     </table>
   );
 }

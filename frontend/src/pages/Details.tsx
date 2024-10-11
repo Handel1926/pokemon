@@ -25,7 +25,7 @@ export default function Details() {
     }
     getPokemone();
   }, [id]);
-  console.log(specie);
+
   return (
     <div className="w-full h-full flex flex-col p-8">
       <h1 className=" capitalize text-5xl">{details?.name}</h1>

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import SearchModal from "./SearchModal";
+
 import { POKEM } from "../../types";
 import DisplaySearchList from "./DisplaySearchList";
+
+import Modal from "./Modal";
 
 function Search() {
   const [searchInput, setSearchInput] = useState<string>("");
@@ -25,8 +27,8 @@ function Search() {
   }, [searchInput, allPokeList]);
 
   return (
-    <SearchModal>
-      <SearchModal.Open>
+    <Modal>
+      <Modal.Open>
         <input
           type="text"
           placeholder="Search by name"
@@ -34,11 +36,11 @@ function Search() {
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         />
-      </SearchModal.Open>
-      <SearchModal.Window>
+      </Modal.Open>
+      <Modal.Window>
         <DisplaySearchList searchList={searchList} />
-      </SearchModal.Window>
-    </SearchModal>
+      </Modal.Window>
+    </Modal>
   );
 }
 

@@ -12,7 +12,7 @@ function Header({ setTheme, theme }: Props) {
     setTheme((preval) => (preval === "light" ? "dark" : "light"));
   };
   return (
-    <nav className=" w-full h-fit flex items-center bg-black">
+    <nav className="absolute z-50 top-0 left-0 w-full h-fit flex items-center bg-black">
       <div className="w-fit flex items-center gap-3">
         <img
           src="/assets/pokemon_icon.png"
