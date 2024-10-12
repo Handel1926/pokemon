@@ -1,37 +1,27 @@
-import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Card from "../ui/Card";
-import { EvolutionChain, POKEMON, PokemonSpecies } from "../../types";
+import { useQuery } from "@tanstack/react-query";
+import { getPokemone } from "../service/getAllPoke";
 
 export default function Details() {
-  const [details, setDetails] = useState<POKEMON>();
-  const [specie, setSpecie] = useState<EvolutionChain>();
   const { id } = useParams();
-
-  useEffect(() => {
-    async function getPokemone() {
-      const res = await fetch(`http://localhost:3000/pokemon/${id}`);
-      const specieres = await fetch(
-        `https://pokeapi.co/api/v2/evolution-chain/${id}`
-      );
-      if (!res.ok) {
-        throw new Error("check your network connection");
-      }
-      const newSpecie = await specieres.json();
-      const detail = await res.json();
-
-      setDetails(detail);
-      setSpecie(newSpecie);
-    }
-    getPokemone();
-  }, [id]);
+  const { data, isPending } = useQuery({
+    queryKey: ["pokemon", [id]],
+    queryFn: () => getPokemone(id as string),
+  });
 
   return (
     <div className="w-full h-full flex flex-col p-8">
-      <h1 className=" capitalize text-5xl">{details?.name}</h1>
-      <div className="w-full h-full flex justify-center items-center">
-        <Card pokemon={details} specie={specie} />
-      </div>
+      {isPending ? (
+        <h1>Loading...</h1>
+      ) : (
+        <>
+          <h1 className=" capitalize text-5xl">{data?.detail.name}</h1>
+          <div className="w-full h-full flex justify-center items-center">
+            <Card pokemon={data?.detail} specie={data?.newSpecie} />
+          </div>
+        </>
+      )}
     </div>
   );
 }

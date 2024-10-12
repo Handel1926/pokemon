@@ -12,9 +12,11 @@ function Search() {
 
   useEffect(() => {
     async function getAllPoke() {
-      const res = await fetch(`http://localhost:3000/pokemon?start=0&stop=150`);
+      const res = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/?offset=0&limit=150`
+      );
       const AllPoke = await res.json();
-      setAllPokeList(AllPoke);
+      setAllPokeList(AllPoke.results);
     }
     getAllPoke();
   }, []);

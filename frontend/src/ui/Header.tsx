@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import Search from "./Search";
 import { ThemeContextType } from "../../types";
+import { Link } from "react-router-dom";
 
 type Props = {
   setTheme: Dispatch<SetStateAction<ThemeContextType>>;
@@ -19,7 +20,9 @@ function Header({ setTheme, theme }: Props) {
           alt="Pokemon_icon"
           className="w-16 h-16"
         />
-        <h1 className="text-4xl text-yellow-200">Pokemone</h1>
+        <h1 className="text-4xl text-yellow-200">
+          <Link to={"/home"}>Pokemone</Link>
+        </h1>
       </div>
 
       <Search />

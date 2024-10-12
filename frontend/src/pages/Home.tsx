@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { PAGE_SIZE, TOTAL_NUM_CARD } from "../pageSize";
-import Card from "../ui/Card";
+import { PAGE_SIZE } from "../pageSize";
 import Table from "../ui/Table";
 import { ThemeContext } from "../ui/AppLayout";
+import { getAllpoke } from "../service/getAllPoke";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 type POKEM = {
   url: string;
@@ -11,23 +12,18 @@ type POKEM = {
 
 function Home() {
   const [pageN, setPageN] = useState(1);
-
-  const [pokeMonList, setPokemonList] = useState<POKEM[]>();
+  const queryClient = useQueryClient();
   const [startList, setStartList] = useState<number>(0);
   const [stopList, setstopList] = useState<number>(20);
   const theme = useContext(ThemeContext);
-
-  useEffect(() => {
-    async function getAllpoke() {
-      const res = await fetch(
-        `http://localhost:3000/pokemon?start=${startList}&stop=${stopList}`
-      );
-      const newPokeList = await res.json();
-      setPokemonList(newPokeList);
-      console.log(newPokeList, startList, stopList);
-    }
-    getAllpoke();
-  }, [startList, stopList]);
+  const { data, isPending } = useQuery({
+    queryKey: ["pokemons", [startList, stopList]],
+    queryFn: () => getAllpoke(startList, startList),
+  });
+  queryClient.prefetchQuery({
+    queryKey: ["pokemons", [startList, stopList]],
+    queryFn: () => getAllpoke(startList, startList),
+  });
 
   useEffect(() => {
     const startIndex = (pageN - 1) * PAGE_SIZE;
@@ -44,7 +40,6 @@ function Home() {
   function goRight() {
     const newPage = pageN === 8 ? 8 : pageN + 1;
     setPageN(newPage);
-    console.log(newPage, startList);
   }
 
   return (
@@ -69,8 +64,9 @@ function Home() {
           Next
         </button>
       </div>
+
       <div className="w-full h-full pb-36 overflow-y-auto">
-        <Table pokeList={pokeMonList} />
+        {isPending ? <h1>Loading...</h1> : <Table pokeList={data} />}
       </div>
     </div>
   );

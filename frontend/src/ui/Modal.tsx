@@ -1,17 +1,6 @@
-import React, {
-  createContext,
-  Dispatch,
-  useState,
-  useContext,
-  cloneElement,
-} from "react";
+import { createContext, useState, useContext, cloneElement } from "react";
 
 import { createPortal } from "react-dom";
-
-interface DISPLAY {
-  showModal: boolean;
-  setShowModal: Dispatch<React.SetStateAction<boolean>>;
-}
 
 export const ModalContext = createContext<any | null>(null);
 
