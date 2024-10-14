@@ -4,7 +4,7 @@ import { UserContext } from "./UserContext";
 import { USER } from "./AppLayout";
 
 type Props = {
-  pokemon: POKEMON;
+  pokemon: POKEMON | undefined;
   specie: EvolutionChain | undefined;
   cardType: string;
 };
@@ -17,13 +17,20 @@ export default function Card({ pokemon, specie, cardType }: Props) {
   const handlecapture = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCaptureInpute(e.target.valueAsNumber);
 
-    if (e.target.valueAsNumber === 10) {
+    if (e.target.valueAsNumber >= 10) {
       const newpokemon = contextVal?.user.pokemon
         ? [...contextVal?.user.pokemon, pokemon]
         : [pokemon];
-      const user = { ...contextVal?.user, pokemon: newpokemon } as USER;
-      contextVal?.setUser(user);
+      const newUser = { ...contextVal?.user, pokemon: newpokemon } as USER;
+      contextVal?.setUser(newUser);
       setCapture(true);
+      const userLocal: USER[] = JSON.parse(
+        localStorage.getItem("users") as string
+      );
+      const updateUser = userLocal.map((user) => {
+        return user.email === newUser.email ? { ...newUser } : { ...user };
+      });
+      localStorage.setItem("users", JSON.stringify(updateUser));
     } else {
       setCapture(false);
     }

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import Search from "./Search";
 import { ThemeContextType } from "../../types";
 import { Link } from "react-router-dom";
@@ -9,8 +9,12 @@ type Props = {
 };
 
 function Header({ setTheme, theme }: Props) {
+  useEffect(() => {
+    setTheme(localStorage.getItem("theme") as ThemeContextType);
+  }, [setTheme]);
   const handleTheme = () => {
     setTheme((preval) => (preval === "light" ? "dark" : "light"));
+    localStorage.setItem("theme", theme);
   };
   return (
     <nav className="absolute z-50 top-0 left-0 w-full h-fit flex items-center justify-between bg-black">

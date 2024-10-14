@@ -35,6 +35,7 @@ function AppLayout() {
   const navigate = useNavigate();
   const userCo = useContext(UserContext);
   const [theme, setTheme] = useState<ThemeContextType>("light");
+
   useEffect(() => {
     if (!userCo?.user.isAuthenticated) {
       navigate("/login");
