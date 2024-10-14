@@ -10,7 +10,10 @@ type Props = {
 
 function Header({ setTheme, theme }: Props) {
   useEffect(() => {
-    setTheme(localStorage.getItem("theme") as ThemeContextType);
+    const lclTheme = localStorage.getItem("theme");
+    if (lclTheme && lclTheme.length > 0) {
+      setTheme(lclTheme as ThemeContextType);
+    }
   }, [setTheme]);
   const handleTheme = () => {
     setTheme((preval) => (preval === "light" ? "dark" : "light"));
