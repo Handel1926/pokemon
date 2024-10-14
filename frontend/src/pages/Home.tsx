@@ -5,11 +5,6 @@ import { ThemeContext } from "../ui/AppLayout";
 import { getAllpoke } from "../service/getAllPoke";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-type POKEM = {
-  url: string;
-  name: string;
-};
-
 function Home() {
   const [pageN, setPageN] = useState(1);
   const queryClient = useQueryClient();

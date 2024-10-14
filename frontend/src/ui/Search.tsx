@@ -25,7 +25,7 @@ function Search() {
     const newSearchList = allPokeList?.filter((poke) =>
       poke.name.toLowerCase().includes(searchInput.toLowerCase())
     );
-    setSearchList((preValue) => newSearchList);
+    setSearchList(() => newSearchList);
   }, [searchInput, allPokeList]);
 
   return (

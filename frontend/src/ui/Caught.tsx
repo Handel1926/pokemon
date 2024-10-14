@@ -1,9 +1,7 @@
-import React, { useContext } from "react";
-import { json } from "react-router-dom";
+import { useContext } from "react";
+
 import { UserContext } from "./UserContext";
 import { ThemeContext, USER } from "./AppLayout";
-import Table from "./Table";
-import { POKEM } from "../../types";
 
 export default function Caught() {
   const contextUser = useContext(UserContext);

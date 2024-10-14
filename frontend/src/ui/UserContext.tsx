@@ -1,10 +1,11 @@
-import React, {
+import {
   createContext,
   Dispatch,
+  ReactNode,
   SetStateAction,
   useState,
 } from "react";
-import { POKEMON } from "../../types";
+
 import { USER } from "./AppLayout";
 
 export interface USERContext {
@@ -12,7 +13,7 @@ export interface USERContext {
   setUser: Dispatch<SetStateAction<USER>>;
 }
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 export const UserContext = createContext<USERContext | undefined>(undefined);
 

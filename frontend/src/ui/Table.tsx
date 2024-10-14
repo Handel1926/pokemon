@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { POKEM, POKEMON } from "../../types";
+import { POKEM } from "../../types";
 import TableRow from "./TableRow";
 import { ThemeContext } from "./AppLayout";
 
