@@ -17,7 +17,6 @@ export default function Modal({ children }) {
 function Open({ children }) {
   const { setShowModal } = useContext(ModalContext);
   return cloneElement(children, {
-    onClick: () => setShowModal(true),
     onFocus: () => setShowModal(true),
   });
 }

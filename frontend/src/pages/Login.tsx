@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../ui/UserContext";
+import { useNavigate } from "react-router-dom";
+import { USER } from "../ui/AppLayout";
 
 function Login() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -7,6 +10,8 @@ function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [activeBtn, setActiveBtn] = useState<boolean>(false);
+  const contextVal = useContext(UserContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     function checkLogin() {
@@ -30,6 +35,30 @@ function Login() {
     }
     checkLogin();
   }, [email, password]);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    const newUser: USER = {
+      email,
+      password,
+      isAuthenticated: true,
+      pokemon: [],
+    };
+
+    const users = localStorage.getItem("users");
+
+    if (users) {
+      const newUsers = [...JSON.parse(users), newUser];
+      console.log(newUsers);
+      localStorage.setItem("users", JSON.stringify(newUsers));
+    } else {
+      localStorage.setItem("users", JSON.stringify([newUser]));
+    }
+    contextVal?.setUser(newUser);
+    sessionStorage.setItem("user", JSON.stringify(newUser));
+
+    navigate("/home");
+  };
 
   return (
     <div className="h-svh w-full flex justify-center items-center">
@@ -84,6 +113,7 @@ function Login() {
               className={`w-fit px-8 py-2 ${
                 activeBtn ? "bg-yellow-800" : "bg-gray-400 cursor-not-allowed"
               } rounded-full`}
+              onClick={handleClick}
               disabled={!activeBtn}
             >
               Login

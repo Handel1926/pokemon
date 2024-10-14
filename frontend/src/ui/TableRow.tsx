@@ -4,14 +4,21 @@ import Card from "./Card";
 
 import { useQuery } from "@tanstack/react-query";
 import { getPokemone } from "../service/getAllPoke";
+import HandleModal from "./HandleModal";
 
 type Props = {
   url: string;
   name: string;
   pokeBall: string;
+  pokeCondition: string;
 };
 
-export default function TableRow({ url, name, pokeBall }: Props) {
+export default function TableRow({
+  url,
+  name,
+  pokeBall,
+  pokeCondition,
+}: Props) {
   const navigate = useNavigate();
   const pokeId = url.split("/")[6];
   const { data, isPending } = useQuery({
@@ -34,13 +41,19 @@ export default function TableRow({ url, name, pokeBall }: Props) {
       <td className=" m-auto p-2 border-2">
         <Modal>
           <Modal.Open>
-            <p>{pokeBall}</p>
+            <HandleModal pokeCondition={pokeCondition}>
+              <p>{pokeBall}</p>
+            </HandleModal>
           </Modal.Open>
           <Modal.Window>
             {isPending ? (
               <h1>Loading...</h1>
             ) : (
-              <Card pokemon={data?.detail} specie={data?.newSpecie} />
+              <Card
+                pokemon={data?.detail}
+                specie={data?.newSpecie}
+                cardType="capture"
+              />
             )}
           </Modal.Window>
         </Modal>

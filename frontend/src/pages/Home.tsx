@@ -30,7 +30,6 @@ function Home() {
     const limit = pageN < 8 ? 20 : 11;
     setstopList(limit);
     setStartList(startIndex);
-    console.log(pageN);
   }, [pageN]);
 
   function goLeft() {

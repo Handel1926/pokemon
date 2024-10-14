@@ -5,6 +5,9 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import AppLayout from "./ui/AppLayout";
 import Details from "./pages/Details";
+import User from "./ui/UserContext";
+import Caught from "./ui/Caught";
+import Red from "./pages/Red";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,14 +21,19 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
+
       <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route element={<AppLayout />}>
-            <Route path="/home" element={<Home />} />
-            <Route path="/pokemon/details/:id" element={<Details />} />
-          </Route>
-        </Routes>
+        <User>
+          <Routes>
+            <Route path="/" element={<Red />} />
+            <Route path="/login" element={<Login />} />
+            <Route element={<AppLayout />}>
+              <Route path="/home" index element={<Home />} />
+              <Route path="/pokemon/details/:id" element={<Details />} />
+              <Route path="/pokemon/caught" element={<Caught />} />
+            </Route>
+          </Routes>
+        </User>
       </BrowserRouter>
     </QueryClientProvider>
   );

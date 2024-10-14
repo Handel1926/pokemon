@@ -18,7 +18,11 @@ export default function Details() {
         <>
           <h1 className=" capitalize text-5xl">{data?.detail.name}</h1>
           <div className="w-full h-full flex justify-center items-center">
-            <Card pokemon={data?.detail} specie={data?.newSpecie} />
+            <Card
+              pokemon={data?.detail}
+              specie={data?.newSpecie}
+              cardType="details"
+            />
           </div>
         </>
       )}

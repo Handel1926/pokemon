@@ -9,6 +9,16 @@ type Props = {
 
 export default function Table({ pokeList }: Props) {
   const theme = useContext(ThemeContext);
+
+  const handleCondition = (index: number) => {
+    if (index % 3 === 0) {
+      return "light";
+    } else if (index % 2 === 0) {
+      return "dark";
+    } else {
+      return "nill";
+    }
+  };
   return (
     <table
       className={`${
@@ -29,6 +39,7 @@ export default function Table({ pokeList }: Props) {
               url={poke.url}
               name={poke.name}
               pokeBall="ball"
+              pokeCondition={handleCondition(index)}
               key={index}
             />
           ))}
