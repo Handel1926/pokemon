@@ -37,7 +37,7 @@ export default function Card({ pokemon, specie, cardType }: Props) {
   };
 
   return (
-    <div className="w-full md:w-[400px] h-[500px] border-2 border-white bg-stone-100 border-3 shadow-md rounded-md shadow-black cursor-pointer flex flex-col justify-center items-center gap-2">
+    <div className="w-full md:w-[400px] h-full py-4 border-2 border-white bg-stone-100 border-3 shadow-md rounded-md shadow-black cursor-pointer flex flex-col justify-center items-center gap-2">
       <h1>{pokemon?.name}</h1>
       <img
         src={pokemon && pokemon.sprites.front_default}
