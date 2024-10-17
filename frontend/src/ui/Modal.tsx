@@ -28,7 +28,7 @@ function Window({ children }) {
     <div
       className={`${
         showModal
-          ? "absolute z-40 top-0 left-0 pt-[20%] md:m-auto w-full h-svh px-4 bg-white/5 backdrop-blur-md flex flex-col"
+          ? "absolute z-40 top-0 left-0 pt-[20%] md:pt-[5%] md:m-auto w-full h-svh px-4 bg-white/5 backdrop-blur-md flex flex-col"
           : "hidden"
       }`}
     >
