@@ -28,12 +28,17 @@ function Window({ children }) {
     <div
       className={`${
         showModal
-          ? "absolute z-40 top-0 left-0 py-[5%] w-full h-svh bg-white backdrop-blur-md flex flex-col"
+          ? "absolute z-40 top-0 left-0 pt-[20%] md:m-auto w-full h-svh px-4 bg-white/5 backdrop-blur-md flex flex-col"
           : "hidden"
       }`}
     >
       <div className="w-full h-fit flex justify-end cursor-pointer">
-        <p onClick={() => setShowModal(false)}>close</p>
+        <p
+          onClick={() => setShowModal(false)}
+          className="bg-gray-200 text-black p-2 rounded-md"
+        >
+          close
+        </p>
       </div>
       <div>{children}</div>
     </div>,

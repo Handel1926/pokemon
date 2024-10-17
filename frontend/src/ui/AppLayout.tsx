@@ -46,7 +46,7 @@ function AppLayout() {
       <div
         className={`${
           theme === "light" ? "bg-white text-black " : "bg-black text-white"
-        }w-full h-svh flex flex-col overflow-hidden mt-[5%]`}
+        }w-full h-svh flex flex-col overflow-hidden pt-[10%] md:pt-[5%]`}
       >
         <Header setTheme={setTheme} theme={theme} />
         <Outlet context={{ user, setUser }} />
